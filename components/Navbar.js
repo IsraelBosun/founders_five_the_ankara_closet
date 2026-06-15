@@ -32,8 +32,7 @@ export default function Navbar() {
         {/* Menu header */}
         <div className="flex items-center justify-between px-5 h-14 border-b border-white/10">
           <Link href="/" onClick={() => setMenuOpen(false)} className="leading-none">
-            <div className="font-display font-bold text-[13px] tracking-[0.28em] text-white uppercase">THE ANKARA</div>
-            <div className="font-display font-bold text-[13px] tracking-[0.28em] text-[#C4703A] uppercase">CLOSET</div>
+            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={160} height={56} className="h-14 w-auto object-contain" style={{ filter: "invert(1)" }} />
           </Link>
           <button
             onClick={() => setMenuOpen(false)}
@@ -91,9 +90,9 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
 
         {/* ── MOBILE ── */}
-        <div className="md:hidden flex items-center justify-between px-4 h-16">
+        <div className="md:hidden flex items-center justify-between px-4 h-24">
           <Link href="/" className="leading-none">
-            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={160} height={56} className="h-14 w-auto object-contain" />
+            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={200} height={80} className="h-20 w-auto object-contain" />
           </Link>
           <button
             onClick={() => setMenuOpen(true)}
@@ -105,10 +104,10 @@ export default function Navbar() {
         </div>
 
         {/* ── DESKTOP ── */}
-        <div className="hidden md:flex items-center justify-between px-8 lg:px-12 h-20">
+        <div className="hidden md:flex items-center justify-between px-8 lg:px-12 h-32">
           {/* Brand */}
           <Link href="/" className="flex-shrink-0 leading-none">
-            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={220} height={72} className="h-18 w-auto object-contain" />
+            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={300} height={100} className="h-28 w-auto object-contain" />
           </Link>
 
           {/* Nav links — right side */}
