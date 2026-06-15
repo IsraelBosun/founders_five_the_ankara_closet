@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -8,8 +9,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="leading-none inline-block mb-4">
-              <div className="font-display font-bold text-[14px] tracking-[0.28em] text-white uppercase">THE ANKARA</div>
-              <div className="font-display font-bold text-[14px] tracking-[0.28em] text-[#C4703A] uppercase">CLOSET</div>
+              <Image src="/ankara_logo.png" alt="The Ankara Closet" width={140} height={46} className="h-[46px] w-auto object-contain" style={{ filter: "invert(1)" }} />
             </Link>
             <p className="text-white/50 text-xs leading-relaxed mb-5 max-w-[170px]">
               Ready-to-wear Ankara outfits, shipped across Nigeria and worldwide.

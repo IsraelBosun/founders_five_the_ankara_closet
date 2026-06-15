@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 export default function Navbar() {
@@ -14,6 +15,7 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const desktopNavLinks = [
+    { href: "/", label: "HOME" },
     { href: "/shop", label: "SHOP" },
     { href: "/wholesale", label: "RESELLER" },
     { href: "/contact", label: "CONTACT", red: true },
@@ -89,10 +91,9 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
 
         {/* ── MOBILE ── */}
-        <div className="md:hidden flex items-center justify-between px-4 h-12">
+        <div className="md:hidden flex items-center justify-between px-4 h-16">
           <Link href="/" className="leading-none">
-            <div className="font-display font-bold text-[12px] tracking-[0.28em] text-black uppercase">THE ANKARA</div>
-            <div className="font-display font-bold text-[12px] tracking-[0.28em] text-[#C4703A] uppercase">CLOSET</div>
+            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={160} height={56} className="h-14 w-auto object-contain" />
           </Link>
           <button
             onClick={() => setMenuOpen(true)}
@@ -104,11 +105,10 @@ export default function Navbar() {
         </div>
 
         {/* ── DESKTOP ── */}
-        <div className="hidden md:flex items-center justify-between px-8 lg:px-12 h-16">
+        <div className="hidden md:flex items-center justify-between px-8 lg:px-12 h-20">
           {/* Brand */}
           <Link href="/" className="flex-shrink-0 leading-none">
-            <div className="font-display font-bold text-[19px] tracking-[0.25em] text-black uppercase">THE ANKARA</div>
-            <div className="font-display font-bold text-[19px] tracking-[0.25em] text-[#C4703A] uppercase">CLOSET</div>
+            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={220} height={72} className="h-18 w-auto object-contain" />
           </Link>
 
           {/* Nav links — right side */}
