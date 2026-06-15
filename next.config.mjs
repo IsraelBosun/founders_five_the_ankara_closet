@@ -5,6 +5,7 @@ const nextConfig = {
       { pathname: '/products/**' },
       { pathname: '/photos/**' },
       { pathname: '/ankara_logo.png' },
+      { pathname: '/ankara_logo1.png' },
     ],
   },
 };

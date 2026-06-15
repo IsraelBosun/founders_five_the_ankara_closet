@@ -30,9 +30,11 @@ export default function Navbar() {
         }`}
       >
         {/* Menu header */}
-        <div className="flex items-center justify-between px-5 h-14 border-b border-white/10">
+        <div className="flex items-center justify-between px-5 h-16 border-b border-white/10">
           <Link href="/" onClick={() => setMenuOpen(false)} className="leading-none">
-            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={200} height={72} className="h-18 w-auto object-contain" style={{ filter: "invert(1)" }} />
+            <div className="bg-white px-3 py-1">
+              <Image src="/ankara_logo1.png" alt="The Ankara Closet" width={140} height={44} className="h-11 w-auto object-contain" />
+            </div>
           </Link>
           <button
             onClick={() => setMenuOpen(false)}
@@ -92,7 +94,7 @@ export default function Navbar() {
         {/* ── MOBILE ── */}
         <div className="md:hidden flex items-center justify-between px-4 h-16">
           <Link href="/" className="leading-none">
-            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={130} height={52} className="h-13 w-auto object-contain" />
+            <Image src="/ankara_logo1.png" alt="The Ankara Closet" width={130} height={52} className="h-13 w-auto object-contain" />
           </Link>
           <button
             onClick={() => setMenuOpen(true)}
@@ -104,10 +106,10 @@ export default function Navbar() {
         </div>
 
         {/* ── DESKTOP ── */}
-        <div className="hidden md:flex items-center justify-between px-8 lg:px-12 h-32">
+        <div className="hidden md:flex items-center justify-between px-8 lg:px-12 h-20">
           {/* Brand */}
           <Link href="/" className="flex-shrink-0 leading-none">
-            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={300} height={100} className="h-28 w-auto object-contain" />
+            <Image src="/ankara_logo1.png" alt="The Ankara Closet" width={180} height={60} className="h-16 w-auto object-contain" />
           </Link>
 
           {/* Nav links — right side */}

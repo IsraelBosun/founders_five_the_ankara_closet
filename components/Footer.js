@@ -9,7 +9,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 md:col-span-1">
             <Link href="/" className="leading-none inline-block mb-4">
-              <Image src="/ankara_logo.png" alt="The Ankara Closet" width={260} height={100} className="h-28 w-auto object-contain" style={{ filter: "invert(1)" }} />
+              <div className="bg-white px-3 py-2">
+                <Image src="/ankara_logo1.png" alt="The Ankara Closet" width={160} height={56} className="h-14 w-auto object-contain" />
+              </div>
             </Link>
             <p className="text-white/50 text-xs leading-relaxed mb-5 max-w-[170px]">
               Ready-to-wear Ankara outfits, shipped across Nigeria and worldwide.
