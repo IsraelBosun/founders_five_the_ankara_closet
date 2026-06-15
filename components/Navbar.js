@@ -32,7 +32,7 @@ export default function Navbar() {
         {/* Menu header */}
         <div className="flex items-center justify-between px-5 h-14 border-b border-white/10">
           <Link href="/" onClick={() => setMenuOpen(false)} className="leading-none">
-            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={160} height={56} className="h-14 w-auto object-contain" style={{ filter: "invert(1)" }} />
+            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={200} height={72} className="h-18 w-auto object-contain" style={{ filter: "invert(1)" }} />
           </Link>
           <button
             onClick={() => setMenuOpen(false)}
@@ -90,9 +90,9 @@ export default function Navbar() {
       <header className="sticky top-0 z-50 bg-white border-b border-gray-100">
 
         {/* ── MOBILE ── */}
-        <div className="md:hidden flex items-center justify-between px-4 h-24">
+        <div className="md:hidden flex items-center justify-between px-4 h-16">
           <Link href="/" className="leading-none">
-            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={200} height={80} className="h-20 w-auto object-contain" />
+            <Image src="/ankara_logo.png" alt="The Ankara Closet" width={130} height={52} className="h-13 w-auto object-contain" />
           </Link>
           <button
             onClick={() => setMenuOpen(true)}
