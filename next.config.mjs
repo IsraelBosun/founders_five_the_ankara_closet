@@ -7,6 +7,13 @@ const nextConfig = {
       { pathname: '/ankara_logo.png' },
       { pathname: '/ankara_logo1.png' },
     ],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
   },
 };
 

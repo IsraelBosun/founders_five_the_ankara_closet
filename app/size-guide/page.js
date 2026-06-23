@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 
 export const metadata = {
   title: "Size Guide | The Ankara Closet",
@@ -35,113 +36,123 @@ export default function SizeGuidePage() {
         <div className="max-w-3xl mx-auto px-6 md:px-10">
 
           {/* Intro */}
-          <div className="mb-10">
-            <p className="text-gray-500 text-sm leading-relaxed max-w-xl">
-              Our pieces are designed to fit true to Nigerian sizing. If you are between sizes, we recommend sizing up. All measurements are in centimetres unless noted. Not sure? WhatsApp us — we'll help you pick the right fit.
-            </p>
-          </div>
+          <Reveal>
+            <div className="mb-10">
+              <p className="text-gray-500 text-sm leading-relaxed max-w-xl">
+                Our pieces are designed to fit true to Nigerian sizing. If you are between sizes, we recommend sizing up. All measurements are in centimetres unless noted. Not sure? WhatsApp us — we'll help you pick the right fit.
+              </p>
+            </div>
+          </Reveal>
 
           {/* Size table */}
-          <div className="mb-14">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-black mb-4">
-              WOMEN&apos;S SIZING — CM
-            </p>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm border-collapse">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    {["Size", "UK", "NG", "Bust", "Waist", "Hips"].map((h) => (
-                      <th key={h} className="text-left py-3 pr-4 text-[10px] font-bold tracking-[0.16em] uppercase text-gray-400 whitespace-nowrap">
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {sizes.map((row) => (
-                    <tr key={row.size} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                      <td className="py-3 pr-4 font-bold text-black">{row.size}</td>
-                      <td className="py-3 pr-4 text-gray-500">{row.uk}</td>
-                      <td className="py-3 pr-4 text-gray-500">{row.ng}</td>
-                      <td className="py-3 pr-4 text-gray-500">{row.bust}</td>
-                      <td className="py-3 pr-4 text-gray-500">{row.waist}</td>
-                      <td className="py-3 pr-4 text-gray-500">{row.hips}</td>
+          <Reveal delay={80}>
+            <div className="mb-14">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-black mb-4">
+                WOMEN&apos;S SIZING — CM
+              </p>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm border-collapse">
+                  <thead>
+                    <tr className="border-b border-gray-200">
+                      {["Size", "UK", "NG", "Bust", "Waist", "Hips"].map((h) => (
+                        <th key={h} className="text-left py-3 pr-4 text-[10px] font-bold tracking-[0.16em] uppercase text-gray-400 whitespace-nowrap">
+                          {h}
+                        </th>
+                      ))}
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {sizes.map((row) => (
+                      <tr key={row.size} className="border-b border-gray-100 hover:bg-gray-50 transition-colors">
+                        <td className="py-3 pr-4 font-bold text-black">{row.size}</td>
+                        <td className="py-3 pr-4 text-gray-500">{row.uk}</td>
+                        <td className="py-3 pr-4 text-gray-500">{row.ng}</td>
+                        <td className="py-3 pr-4 text-gray-500">{row.bust}</td>
+                        <td className="py-3 pr-4 text-gray-500">{row.waist}</td>
+                        <td className="py-3 pr-4 text-gray-500">{row.hips}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* How to measure */}
-          <div className="mb-14">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-black mb-6">
-              HOW TO MEASURE
-            </p>
-            <div className="flex flex-col gap-5">
-              {[
-                {
-                  label: "Bust",
-                  desc: "Measure around the fullest part of your chest, keeping the tape parallel to the floor. Do not pull tight.",
-                },
-                {
-                  label: "Waist",
-                  desc: "Measure around the narrowest part of your natural waist — typically about 2.5cm above your belly button.",
-                },
-                {
-                  label: "Hips",
-                  desc: "Measure around the fullest part of your hips and seat, approximately 20–25cm below your natural waist.",
-                },
-              ].map((item) => (
-                <div key={item.label} className="flex gap-4">
-                  <span className="font-display text-lg font-bold text-black w-16 flex-shrink-0 uppercase">{item.label}</span>
-                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
+          <Reveal>
+            <div className="mb-14">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-black mb-6">
+                HOW TO MEASURE
+              </p>
+              <div className="flex flex-col gap-5">
+                {[
+                  {
+                    label: "Bust",
+                    desc: "Measure around the fullest part of your chest, keeping the tape parallel to the floor. Do not pull tight.",
+                  },
+                  {
+                    label: "Waist",
+                    desc: "Measure around the narrowest part of your natural waist — typically about 2.5cm above your belly button.",
+                  },
+                  {
+                    label: "Hips",
+                    desc: "Measure around the fullest part of your hips and seat, approximately 20–25cm below your natural waist.",
+                  },
+                ].map((item) => (
+                  <div key={item.label} className="flex gap-4">
+                    <span className="font-display text-lg font-bold text-black w-16 flex-shrink-0 uppercase">{item.label}</span>
+                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Product notes */}
-          <div className="mb-14">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-black mb-6">
-              PRODUCT NOTES
-            </p>
-            <div className="flex flex-col gap-3">
-              {[
-                { cat: "Dresses", note: "Available in S, M, L, XL. Fitted styles — size up if between sizes." },
-                { cat: "Two-Piece Sets", note: "Available in S, M, L, XL. Co-ordinate sets fit slightly relaxed." },
-                { cat: "Asoke Dress", note: "Available in S, M, L, XL and XXL." },
-                { cat: "Kimono & Pant Sets", note: "Free size (S–XL). The kimono is one size fits most; trousers have elasticated waist." },
-              ].map((item) => (
-                <div key={item.cat} className="border border-gray-100 p-4 flex gap-4">
-                  <span className="font-bold text-xs text-black w-28 flex-shrink-0">{item.cat}</span>
-                  <span className="text-gray-500 text-xs leading-relaxed">{item.note}</span>
-                </div>
-              ))}
+          <Reveal delay={60}>
+            <div className="mb-14">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-black mb-6">
+                PRODUCT NOTES
+              </p>
+              <div className="flex flex-col gap-3">
+                {[
+                  { cat: "Dresses", note: "Available in S, M, L, XL. Fitted styles — size up if between sizes." },
+                  { cat: "Two-Piece Sets", note: "Available in S, M, L, XL. Co-ordinate sets fit slightly relaxed." },
+                  { cat: "Asoke Dress", note: "Available in S, M, L, XL and XXL." },
+                  { cat: "Kimono & Pant Sets", note: "Free size (S–XL). The kimono is one size fits most; trousers have elasticated waist." },
+                ].map((item) => (
+                  <div key={item.cat} className="border border-gray-100 p-4 flex gap-4">
+                    <span className="font-bold text-xs text-black w-28 flex-shrink-0">{item.cat}</span>
+                    <span className="text-gray-500 text-xs leading-relaxed">{item.note}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* CTA */}
-          <div className="bg-black p-8 text-center">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-3">
-              STILL NOT SURE?
-            </p>
-            <h2 className="font-display text-2xl font-bold text-white uppercase tracking-tight mb-2">
-              Ask us on WhatsApp
-            </h2>
-            <p className="text-white/50 text-sm mb-6">
-              Send us your measurements and we&apos;ll recommend the perfect size for you.
-            </p>
-            <a
-              href="https://wa.me/2348133053455"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#25D366] text-white text-[11px] font-bold tracking-[0.18em] uppercase px-8 py-3.5 hover:bg-[#1eb358] transition-colors"
-            >
-              <WhatsAppIcon />
-              GET SIZING HELP
-            </a>
-          </div>
+          <Reveal>
+            <div className="bg-black p-8 text-center">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-3">
+                STILL NOT SURE?
+              </p>
+              <h2 className="font-display text-2xl font-bold text-white uppercase tracking-tight mb-2">
+                Ask us on WhatsApp
+              </h2>
+              <p className="text-white/50 text-sm mb-6">
+                Send us your measurements and we&apos;ll recommend the perfect size for you.
+              </p>
+              <a
+                href="https://wa.me/2348133053455"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-[#25D366] text-white text-[11px] font-bold tracking-[0.18em] uppercase px-8 py-3.5 hover:bg-[#1eb358] transition-colors"
+              >
+                <WhatsAppIcon />
+                GET SIZING HELP
+              </a>
+            </div>
+          </Reveal>
 
           <div className="mt-6 text-center">
             <Link

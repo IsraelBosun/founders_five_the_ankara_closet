@@ -3,10 +3,34 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
-import { getFeaturedProducts, categories, testimonials } from "@/lib/products";
+import Reveal from "@/components/Reveal";
+import { getFeaturedProducts, getCategories, getTestimonials, getSiteContent } from "@/lib/db";
 
-export default function HomePage() {
-  const featured = getFeaturedProducts();
+export const dynamic = 'force-dynamic'
+
+export default async function HomePage() {
+  const [featured, categories, testimonials, content] = await Promise.all([
+    getFeaturedProducts(),
+    getCategories(),
+    getTestimonials(),
+    getSiteContent(),
+  ]);
+
+  const heroImage = content.hero_image || '/products/product_2_photo_1.jpeg';
+  const heroTitle = content.hero_title || 'ANKARA SEASON';
+  const heroSubtitle = content.hero_subtitle || 'Ready-to-wear. No tailor stress. Delivered to your door across Nigeria and worldwide.';
+  const resellerTitle = content.reseller_title || 'BECOME A RESELLER.';
+  const resellerDesc = content.reseller_description || 'Boutique owners and fashion vendors: get wholesale prices, bulk discounts, and consistent stock for resale.';
+  const resellerImage = content.reseller_image || '/products/product_3_photo_1.jpeg';
+  const reviewRating = content.review_rating || '4.9';
+  const reviewCountText = content.review_count_text || 'Loved by 500+ customers';
+
+  const catDisplay = categories.length > 0 ? categories : [
+    { name: "Dresses",        image: "/products/product_1_photo_1.jpeg", bg: "#E8C9A0" },
+    { name: "2-Pieces",       image: "/products/product_4_photo_1.jpeg", bg: "#C4703A" },
+    { name: "Asoke",          image: "/products/product_5_photo_1.jpeg", bg: "#A84020" },
+    { name: "Kimonos & Sets", image: "/photos/photo_1.jpeg",             bg: "#6B3010" },
+  ];
 
   return (
     <>
@@ -16,7 +40,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden bg-black" style={{ minHeight: "85vh" }}>
         <div className="absolute inset-0">
           <Image
-            src="/products/product_2_photo_1.jpeg"
+            src={heroImage}
             alt="The Ankara Closet"
             fill
             priority
@@ -30,9 +54,11 @@ export default function HomePage() {
         <div className="md:hidden relative z-10 flex flex-col px-5 pt-8 pb-10" style={{ minHeight: "85vh" }}>
           <div className="mt-auto">
             <h1 className="font-display text-[80px] font-bold text-white uppercase leading-none tracking-tight mb-2">
-              ANKARA<br />SEASON
+              {heroTitle.split(' ').map((word, i) => (
+                <span key={i}>{word}<br /></span>
+              ))}
             </h1>
-            <p className="text-white/80 text-sm mb-6">Ready-to-wear. No tailor stress.</p>
+            <p className="text-white/80 text-sm mb-6">{heroSubtitle.split('.')[0]}.</p>
             <Link
               href="/shop"
               className="block w-full bg-white text-black text-center text-[11px] font-bold tracking-[0.22em] uppercase py-4 hover:bg-white/90 transition-colors"
@@ -49,10 +75,17 @@ export default function HomePage() {
         >
           <div className="mt-auto max-w-3xl">
             <h1 className="font-display text-[clamp(5rem,11vw,9rem)] font-bold text-white uppercase leading-none tracking-tight mb-5">
-              ANKARA<br />SEASON.
+              {heroTitle.includes(' ') ? (
+                <>
+                  {heroTitle.split(' ').slice(0, Math.ceil(heroTitle.split(' ').length / 2)).join(' ')}<br />
+                  {heroTitle.split(' ').slice(Math.ceil(heroTitle.split(' ').length / 2)).join(' ')}.
+                </>
+              ) : (
+                <>{heroTitle}.</>
+              )}
             </h1>
             <p className="text-white/80 text-lg max-w-md mb-8 leading-relaxed">
-              Ready-to-wear. No tailor stress. Delivered to your door across Nigeria and worldwide.
+              {heroSubtitle}
             </p>
             <div className="flex gap-4">
               <Link
@@ -123,74 +156,69 @@ export default function HomePage() {
       {/* ── SHOP BY CATEGORY ──────────────────────────────────────── */}
       <section className="bg-white py-10 md:py-16">
         <div className="max-w-7xl mx-auto">
-          <div className="px-4 md:px-10 lg:px-16 mb-6 md:mb-10 md:text-center">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-2">
-              SHOP BY CATEGORY
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-black tracking-tight">
-              Find your style
-            </h2>
-          </div>
+          <Reveal>
+            <div className="px-4 md:px-10 lg:px-16 mb-6 md:mb-10 md:text-center">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-2">
+                SHOP BY CATEGORY
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-black tracking-tight">
+                Find your style
+              </h2>
+            </div>
+          </Reveal>
 
           {/* Mobile: horizontal scroll */}
-          <div className="md:hidden flex gap-3 overflow-x-auto scrollbar-hide px-4 pb-2">
-            {[
-              { name: "DRESSES", href: "/shop?category=Dresses", bg: "#E8C9A0", img: "/products/product_1_photo_1.jpeg" },
-              { name: "TWO-PIECE", href: "/shop?category=2-Pieces", bg: "#C4703A", img: "/products/product_4_photo_1.jpeg" },
-              { name: "ASOKE", href: "/shop?category=Asoke", bg: "#A84020", img: "/products/product_5_photo_1.jpeg" },
-              { name: "KIMONO", href: "/shop?category=Kimonos+%26+Sets", bg: "#6B3010", img: "/photos/photo_1.jpeg" },
-            ].map((cat) => (
-              <Link
-                key={cat.name}
-                href={cat.href}
-                className="group relative flex-shrink-0 overflow-hidden"
-                style={{ width: "70vw", aspectRatio: "3/4", backgroundColor: cat.bg }}
-              >
-                <Image
-                  src={cat.img}
-                  alt={cat.name}
-                  fill
-                  sizes="70vw"
-                  className="object-cover opacity-70"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="font-display text-xl font-bold text-white tracking-[0.1em] uppercase">
-                    {cat.name}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <Reveal delay={100}>
+            <div className="md:hidden flex gap-3 overflow-x-auto scrollbar-hide px-4 pb-2">
+              {catDisplay.map((cat) => (
+                <Link
+                  key={cat.name}
+                  href={`/shop?category=${encodeURIComponent(cat.name)}`}
+                  className="group relative flex-shrink-0 overflow-hidden"
+                  style={{ width: "70vw", aspectRatio: "3/4", backgroundColor: cat.bg }}
+                >
+                  <Image
+                    src={cat.image}
+                    alt={cat.name}
+                    fill
+                    sizes="70vw"
+                    className="object-cover opacity-70"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="font-display text-xl font-bold text-white tracking-[0.1em] uppercase">
+                      {cat.name}
+                    </p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </Reveal>
 
           {/* Desktop: 4-column grid */}
           <div className="hidden md:grid md:grid-cols-4 gap-4 px-10 lg:px-16">
-            {[
-              { name: "DRESSES", href: "/shop?category=Dresses", bg: "#E8C9A0", img: "/products/product_1_photo_1.jpeg" },
-              { name: "TWO-PIECE", href: "/shop?category=2-Pieces", bg: "#C4703A", img: "/products/product_4_photo_1.jpeg" },
-              { name: "ASOKE", href: "/shop?category=Asoke", bg: "#A84020", img: "/products/product_5_photo_1.jpeg" },
-              { name: "KIMONO", href: "/shop?category=Kimonos+%26+Sets", bg: "#6B3010", img: "/photos/photo_1.jpeg" },
-            ].map((cat) => (
-              <Link
-                key={cat.name}
-                href={cat.href}
-                className="group relative overflow-hidden"
-                style={{ aspectRatio: "3/4", backgroundColor: cat.bg }}
-              >
-                <Image
-                  src={cat.img}
-                  alt={cat.name}
-                  fill
-                  sizes="25vw"
-                  className="object-cover opacity-70 group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-4">
-                  <p className="font-display text-xl font-bold text-white tracking-[0.1em] uppercase">
-                    {cat.name}
-                  </p>
-                </div>
-              </Link>
+            {catDisplay.map((cat, i) => (
+              <Reveal key={cat.name} delay={i * 80}>
+                <Link
+                  href={`/shop?category=${encodeURIComponent(cat.name)}`}
+                  className="group relative overflow-hidden block"
+                  style={{ aspectRatio: "3/4", backgroundColor: cat.bg }}
+                >
+                  <Image
+                    src={cat.image}
+                    alt={cat.name}
+                    fill
+                    sizes="25vw"
+                    className="object-cover opacity-70 group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-4">
+                    <p className="font-display text-xl font-bold text-white tracking-[0.1em] uppercase">
+                      {cat.name}
+                    </p>
+                  </div>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -199,40 +227,39 @@ export default function HomePage() {
       {/* ── NEW ARRIVALS ───────────────────────────────────────────── */}
       <section className="bg-white py-8 md:py-16">
         <div className="max-w-7xl mx-auto px-4 md:px-10 lg:px-16">
-          {/* Desktop heading */}
-          <div className="hidden md:flex items-end justify-between mb-8">
-            <div>
-              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-1">
-                NEW ARRIVALS
-              </p>
-              <h2 className="font-display text-4xl font-bold text-black tracking-tight">
-                Fresh off the rack
-              </h2>
+          <Reveal>
+            <div className="hidden md:flex items-end justify-between mb-8">
+              <div>
+                <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-1">
+                  NEW ARRIVALS
+                </p>
+                <h2 className="font-display text-4xl font-bold text-black tracking-tight">
+                  Fresh off the rack
+                </h2>
+              </div>
+              <Link
+                href="/shop"
+                className="text-[11px] font-bold tracking-[0.16em] uppercase text-black hover:opacity-50 transition-opacity border-b border-black pb-0.5"
+              >
+                VIEW ALL →
+              </Link>
             </div>
-            <Link
-              href="/shop"
-              className="text-[11px] font-bold tracking-[0.16em] uppercase text-black hover:opacity-50 transition-opacity border-b border-black pb-0.5"
-            >
-              VIEW ALL →
-            </Link>
-          </div>
 
-          {/* Mobile heading */}
-          <div className="flex md:hidden items-center justify-between mb-5">
-            <h2 className="font-display text-2xl font-bold text-black tracking-tight uppercase">
-              NEW ARRIVALS
-            </h2>
-            <Link
-              href="/shop"
-              className="text-[10px] font-bold tracking-[0.16em] uppercase text-black hover:opacity-50 transition-opacity"
-            >
-              VIEW ALL
-            </Link>
-          </div>
+            <div className="flex md:hidden items-center justify-between mb-5">
+              <h2 className="font-display text-2xl font-bold text-black tracking-tight uppercase">
+                NEW ARRIVALS
+              </h2>
+              <Link href="/shop" className="text-[10px] font-bold tracking-[0.16em] uppercase text-black hover:opacity-50 transition-opacity">
+                VIEW ALL
+              </Link>
+            </div>
+          </Reveal>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5">
-            {featured.map((product) => (
-              <ProductCard key={product.id} product={product} />
+            {featured.map((product, i) => (
+              <Reveal key={product.id} delay={i * 80}>
+                <ProductCard product={product} />
+              </Reveal>
             ))}
           </div>
         </div>
@@ -240,16 +267,15 @@ export default function HomePage() {
 
       {/* ── RESELLER CTA ──────────────────────────────────────────── */}
       <section className="bg-black md:grid md:grid-cols-2">
-        <div className="px-6 md:px-12 lg:px-16 py-14 flex flex-col justify-center">
+        <Reveal className="px-6 md:px-12 lg:px-16 py-14 flex flex-col justify-center">
           <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-4">
             FOR BUSINESS OWNERS
           </p>
           <h2 className="font-display text-[clamp(2.8rem,8vw,4.5rem)] font-bold text-white uppercase leading-none tracking-tight mb-4">
-            BECOME A<br />RESELLER.
+            {resellerTitle}
           </h2>
           <p className="text-white/55 text-sm mb-7 max-w-md leading-relaxed">
-            Boutique owners and fashion vendors: get wholesale prices, bulk discounts,
-            and consistent stock for resale.
+            {resellerDesc}
           </p>
           <div className="flex gap-6 mb-8">
             {["Bulk discounts", "Fast restocking", "Direct line"].map((f) => (
@@ -265,11 +291,11 @@ export default function HomePage() {
           >
             APPLY NOW
           </Link>
-        </div>
+        </Reveal>
 
         <div className="hidden md:block relative bg-black">
           <Image
-            src="/products/product_3_photo_1.jpeg"
+            src={resellerImage}
             alt="Reseller"
             fill
             sizes="50vw"
@@ -281,31 +307,35 @@ export default function HomePage() {
       {/* ── REVIEWS ───────────────────────────────────────────────── */}
       <section className="bg-white py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-5 md:px-10 lg:px-16">
-          <div className="text-center mb-8 md:mb-10">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-2">
-              REVIEWS &middot; 4.9
-            </p>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-black tracking-tight">
-              <span className="hidden md:inline">Loved by 500+ customers</span>
-              <span className="md:hidden">REVIEWS ★ 4.9</span>
-            </h2>
-          </div>
+          <Reveal>
+            <div className="text-center mb-8 md:mb-10">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-2">
+                REVIEWS &middot; {reviewRating}
+              </p>
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-black tracking-tight">
+                <span className="hidden md:inline">{reviewCountText}</span>
+                <span className="md:hidden">REVIEWS ★ {reviewRating}</span>
+              </h2>
+            </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {testimonials.slice(0, 3).map((t) => (
-              <div key={t.id} className="border border-gray-100 p-5">
-                <div className="flex gap-0.5 mb-3">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <span key={i} className="text-black text-sm">★</span>
-                  ))}
+            {testimonials.slice(0, 3).map((t, i) => (
+              <Reveal key={t.id} delay={i * 100}>
+                <div className="border border-gray-100 p-5">
+                  <div className="flex gap-0.5 mb-3">
+                    {Array.from({ length: t.stars || 5 }).map((_, j) => (
+                      <span key={j} className="text-black text-sm">★</span>
+                    ))}
+                  </div>
+                  <p className="text-black text-sm leading-relaxed mb-4">
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <p className="text-gray-400 text-xs">
+                    {t.name} &middot; {t.location}
+                  </p>
                 </div>
-                <p className="text-black text-sm leading-relaxed mb-4">
-                  &ldquo;{t.text}&rdquo;
-                </p>
-                <p className="text-gray-400 text-xs">
-                  {t.name} &middot; {t.location}
-                </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -313,27 +343,29 @@ export default function HomePage() {
 
       {/* ── EMAIL SUBSCRIBE (desktop) ─────────────────────────────── */}
       <section className="hidden md:block bg-white py-12 border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-10 lg:px-16 text-center">
-          <h2 className="font-display text-3xl font-bold text-black tracking-tight mb-2">
-            Join the closet
-          </h2>
-          <p className="text-gray-400 text-sm mb-6">
-            Be first to know about new drops, restocks and exclusive discounts
-          </p>
-          <div className="flex gap-0 max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="flex-1 border border-gray-300 border-r-0 px-4 py-3 text-sm focus:outline-none focus:border-black"
-            />
-            <button
-              type="submit"
-              className="bg-black text-white text-[10px] font-bold tracking-[0.2em] uppercase px-6 py-3 hover:bg-gray-900 transition-colors flex-shrink-0"
-            >
-              SUBSCRIBE
-            </button>
+        <Reveal>
+          <div className="max-w-7xl mx-auto px-10 lg:px-16 text-center">
+            <h2 className="font-display text-3xl font-bold text-black tracking-tight mb-2">
+              Join the closet
+            </h2>
+            <p className="text-gray-400 text-sm mb-6">
+              Be first to know about new drops, restocks and exclusive discounts
+            </p>
+            <div className="flex gap-0 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 border border-gray-300 border-r-0 px-4 py-3 text-sm focus:outline-none focus:border-black"
+              />
+              <button
+                type="submit"
+                className="bg-black text-white text-[10px] font-bold tracking-[0.2em] uppercase px-6 py-3 hover:bg-gray-900 transition-colors flex-shrink-0"
+              >
+                SUBSCRIBE
+              </button>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       <Footer />

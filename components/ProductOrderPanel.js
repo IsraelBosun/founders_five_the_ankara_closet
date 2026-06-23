@@ -3,25 +3,23 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const WHATSAPP_NUMBER = "2348133053455";
-
 function fmt(amount) {
   return `₦${amount.toLocaleString("en-NG")}`;
 }
 
-function buildLink(product, size, qty) {
+function buildLink(product, size, qty, whatsappNumber) {
   const total = fmt(product.price * qty);
   const msg = encodeURIComponent(
     `Hello! I'd like to order:\n\n*${product.name}*\nSize: ${size}\nQuantity: ${qty}\nPrice per item: ${fmt(product.price)}\nTotal: ${total}\n\nPlease confirm availability and delivery. Thank you! 🙏`
   );
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${msg}`;
+  return `https://wa.me/${whatsappNumber}?text=${msg}`;
 }
 
-export default function ProductOrderPanel({ product }) {
+export default function ProductOrderPanel({ product, whatsappNumber = "2348133053455" }) {
   const [selectedSize, setSelectedSize] = useState(product.sizes?.[0] ?? "");
   const [qty, setQty] = useState(1);
 
-  const link = buildLink(product, selectedSize, qty);
+  const link = buildLink(product, selectedSize, qty, whatsappNumber);
   const total = fmt(product.price * qty);
 
   return (

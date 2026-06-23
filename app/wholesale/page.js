@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 
 export const metadata = {
   title: "Wholesale & Resellers | The Ankara Closet",
@@ -67,14 +68,16 @@ export default function WholesalePage() {
       {/* Benefits */}
       <section className="bg-white py-16">
         <div className="max-w-7xl mx-auto px-6 md:px-10 lg:px-16">
-          <div className="text-center mb-12">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-2">
-              WHY RESELLERS CHOOSE US
-            </p>
-            <h2 className="font-display text-4xl font-bold text-black tracking-tight uppercase">
-              Built for profit
-            </h2>
-          </div>
+          <Reveal>
+            <div className="text-center mb-12">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-2">
+                WHY RESELLERS CHOOSE US
+              </p>
+              <h2 className="font-display text-4xl font-bold text-black tracking-tight uppercase">
+                Built for profit
+              </h2>
+            </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
@@ -102,13 +105,15 @@ export default function WholesalePage() {
                 title: "Nationwide & Abroad",
                 desc: "Whether you're in Abuja, Lagos, London or Houston — we deliver directly to you so you can sell from anywhere.",
               },
-            ].map((item) => (
-              <div key={item.title} className="border border-gray-100 p-6">
-                <h3 className="font-display text-lg font-bold text-black tracking-tight uppercase mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-              </div>
+            ].map((item, i) => (
+              <Reveal key={item.title} delay={i * 70}>
+                <div className="border border-gray-100 p-6 h-full">
+                  <h3 className="font-display text-lg font-bold text-black tracking-tight uppercase mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -117,14 +122,16 @@ export default function WholesalePage() {
       {/* How it works */}
       <section className="bg-white py-16 border-t border-gray-100">
         <div className="max-w-3xl mx-auto px-6 md:px-10">
-          <div className="text-center mb-12">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-2">
-              SIMPLE PROCESS
-            </p>
-            <h2 className="font-display text-4xl font-bold text-black tracking-tight uppercase">
-              How it works
-            </h2>
-          </div>
+          <Reveal>
+            <div className="text-center mb-12">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-2">
+                SIMPLE PROCESS
+              </p>
+              <h2 className="font-display text-4xl font-bold text-black tracking-tight uppercase">
+                How it works
+              </h2>
+            </div>
+          </Reveal>
 
           <div className="flex flex-col">
             {[
@@ -148,23 +155,22 @@ export default function WholesalePage() {
                 title: "Receive & Start Selling",
                 desc: "We deliver to your location. Post on Instagram, sell in your boutique, or ship to your own customers. It's all profit from here.",
               },
-            ].map((item) => (
-              <div
-                key={item.step}
-                className="flex gap-6 py-8 border-b border-gray-100 last:border-0"
-              >
-                <div className="shrink-0 w-12 text-right">
-                  <span className="font-display text-5xl font-bold text-gray-100">
-                    {item.step}
-                  </span>
+            ].map((item, i) => (
+              <Reveal key={item.step} delay={i * 80}>
+                <div className="flex gap-6 py-8 border-b border-gray-100 last:border-0">
+                  <div className="shrink-0 w-12 text-right">
+                    <span className="font-display text-5xl font-bold text-gray-100">
+                      {item.step}
+                    </span>
+                  </div>
+                  <div>
+                    <h3 className="font-display text-xl font-bold text-black tracking-tight uppercase mb-2">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-display text-xl font-bold text-black tracking-tight uppercase mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -172,26 +178,28 @@ export default function WholesalePage() {
 
       {/* Final CTA */}
       <section className="bg-black py-16 text-center">
-        <div className="max-w-2xl mx-auto px-6">
-          <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-4">
-            READY TO START?
-          </p>
-          <h2 className="font-display text-4xl font-bold text-white tracking-tight uppercase mb-4">
-            Let&apos;s build something<br />profitable together
-          </h2>
-          <p className="text-white/50 text-sm mb-8 max-w-md mx-auto">
-            Reach out on WhatsApp today. We respond fast and will have you selling in no time.
-          </p>
-          <a
-            href={WHATSAPP_WHOLESALE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-[#25D366] text-white text-[11px] font-bold tracking-[0.18em] uppercase px-10 py-4 hover:bg-[#1eb358] transition-colors"
-          >
-            <WhatsAppIcon />
-            START THE CONVERSATION
-          </a>
-        </div>
+        <Reveal>
+          <div className="max-w-2xl mx-auto px-6">
+            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-4">
+              READY TO START?
+            </p>
+            <h2 className="font-display text-4xl font-bold text-white tracking-tight uppercase mb-4">
+              Let&apos;s build something<br />profitable together
+            </h2>
+            <p className="text-white/50 text-sm mb-8 max-w-md mx-auto">
+              Reach out on WhatsApp today. We respond fast and will have you selling in no time.
+            </p>
+            <a
+              href={WHATSAPP_WHOLESALE}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-[#25D366] text-white text-[11px] font-bold tracking-[0.18em] uppercase px-10 py-4 hover:bg-[#1eb358] transition-colors"
+            >
+              <WhatsAppIcon />
+              START THE CONVERSATION
+            </a>
+          </div>
+        </Reveal>
       </section>
 
       <Footer />

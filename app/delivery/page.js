@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 
 export const metadata = {
   title: "Delivery Information | The Ankara Closet",
@@ -32,12 +33,14 @@ export default function DeliveryPage() {
               { icon: <TruckIcon />, title: "2–4 Days", desc: "Standard delivery within Nigeria" },
               { icon: <ShieldIcon />, title: "Pay on Delivery", desc: "Available for most locations in Nigeria" },
               { icon: <GlobeIcon />, title: "Worldwide", desc: "We ship to the diaspora — UK, US, Canada & more" },
-            ].map((item) => (
-              <div key={item.title} className="border border-gray-100 p-6 text-center">
-                <div className="flex justify-center mb-3 text-black">{item.icon}</div>
-                <p className="font-display text-xl font-bold text-black tracking-tight uppercase mb-1">{item.title}</p>
-                <p className="text-gray-500 text-sm">{item.desc}</p>
-              </div>
+            ].map((item, i) => (
+              <Reveal key={item.title} delay={i * 80}>
+                <div className="border border-gray-100 p-6 text-center h-full">
+                  <div className="flex justify-center mb-3 text-black">{item.icon}</div>
+                  <p className="font-display text-xl font-bold text-black tracking-tight uppercase mb-1">{item.title}</p>
+                  <p className="text-gray-500 text-sm">{item.desc}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
 
@@ -73,33 +76,37 @@ export default function DeliveryPage() {
                 body: "We want you to love your purchase. If there's an issue with your order — wrong size, damage, or quality concern — message us on WhatsApp within 48 hours of receiving your item. We'll sort it out promptly.",
               },
             ].map((item, i) => (
-              <div key={item.title} className={`py-6 ${i < 6 ? "border-b border-gray-100" : ""}`}>
-                <p className="font-display text-lg font-bold text-black tracking-tight uppercase mb-2">
-                  {item.title}
-                </p>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.body}</p>
-              </div>
+              <Reveal key={item.title} delay={i * 50}>
+                <div className={`py-6 ${i < 6 ? "border-b border-gray-100" : ""}`}>
+                  <p className="font-display text-lg font-bold text-black tracking-tight uppercase mb-2">
+                    {item.title}
+                  </p>
+                  <p className="text-gray-500 text-sm leading-relaxed">{item.body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
 
           {/* CTA */}
-          <div className="mt-12 bg-black p-8 text-center">
-            <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-3">
-              STILL HAVE QUESTIONS?
-            </p>
-            <h2 className="font-display text-2xl font-bold text-white uppercase tracking-tight mb-4">
-              Chat with us on WhatsApp
-            </h2>
-            <a
-              href="https://wa.me/2348133053455"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#25D366] text-white text-[11px] font-bold tracking-[0.18em] uppercase px-8 py-3.5 hover:bg-[#1eb358] transition-colors"
-            >
-              <WhatsAppIcon />
-              CHAT NOW
-            </a>
-          </div>
+          <Reveal>
+            <div className="mt-12 bg-black p-8 text-center">
+              <p className="text-[10px] font-bold tracking-[0.25em] uppercase text-[#C4703A] mb-3">
+                STILL HAVE QUESTIONS?
+              </p>
+              <h2 className="font-display text-2xl font-bold text-white uppercase tracking-tight mb-4">
+                Chat with us on WhatsApp
+              </h2>
+              <a
+                href="https://wa.me/2348133053455"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 bg-[#25D366] text-white text-[11px] font-bold tracking-[0.18em] uppercase px-8 py-3.5 hover:bg-[#1eb358] transition-colors"
+              >
+                <WhatsAppIcon />
+                CHAT NOW
+              </a>
+            </div>
+          </Reveal>
 
           <div className="mt-6 text-center">
             <Link

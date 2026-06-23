@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Reveal from "@/components/Reveal";
 import { getWhatsAppGeneralLink } from "@/lib/products";
 
 export const metadata = {
@@ -27,137 +28,151 @@ export default function ContactPage() {
         <div className="max-w-4xl mx-auto px-6 md:px-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* WhatsApp */}
-            <a
-              href={getWhatsAppGeneralLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center text-center bg-[#25D366] p-10 text-white hover:opacity-95 transition-opacity"
-            >
-              <div className="w-14 h-14 bg-white/20 flex items-center justify-center mb-4">
-                <WhatsAppIcon size={28} />
-              </div>
-              <p className="font-display text-2xl font-bold tracking-tight uppercase mb-1">WhatsApp</p>
-              <p className="text-white/75 text-sm mb-5 max-w-xs">
-                The fastest way to reach us — order, ask questions, or request the wholesale catalogue.
-              </p>
-              <span className="text-[11px] font-bold tracking-[0.18em] uppercase bg-white/20 px-5 py-2">
-                CHAT NOW →
-              </span>
-            </a>
+            <Reveal>
+              <a
+                href={getWhatsAppGeneralLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center text-center bg-[#25D366] p-10 text-white hover:opacity-95 transition-opacity h-full"
+              >
+                <div className="w-14 h-14 bg-white/20 flex items-center justify-center mb-4">
+                  <WhatsAppIcon size={28} />
+                </div>
+                <p className="font-display text-2xl font-bold tracking-tight uppercase mb-1">WhatsApp</p>
+                <p className="text-white/75 text-sm mb-5 max-w-xs">
+                  The fastest way to reach us — order, ask questions, or request the wholesale catalogue.
+                </p>
+                <span className="text-[11px] font-bold tracking-[0.18em] uppercase bg-white/20 px-5 py-2">
+                  CHAT NOW →
+                </span>
+              </a>
+            </Reveal>
 
             {/* Instagram */}
-            <a
-              href="https://www.instagram.com/theanakaracloset"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center text-center p-10 text-white hover:opacity-95 transition-opacity"
-              style={{ background: "linear-gradient(135deg, #833AB4, #FD1D1D, #F56040)" }}
-            >
-              <div className="w-14 h-14 bg-white/20 flex items-center justify-center mb-4">
-                <InstagramIcon size={28} />
-              </div>
-              <p className="font-display text-2xl font-bold tracking-tight uppercase mb-1">Instagram</p>
-              <p className="text-white/75 text-sm mb-5 max-w-xs">
-                Follow us for new arrivals, styling inspiration, and behind-the-scenes looks.
-              </p>
-              <span className="text-[11px] font-bold tracking-[0.18em] uppercase bg-white/20 px-5 py-2">
-                @THEANAKARACLOSET →
-              </span>
-            </a>
+            <Reveal delay={80}>
+              <a
+                href="https://www.instagram.com/theanakaracloset"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center text-center p-10 text-white hover:opacity-95 transition-opacity h-full"
+                style={{ background: "linear-gradient(135deg, #833AB4, #FD1D1D, #F56040)" }}
+              >
+                <div className="w-14 h-14 bg-white/20 flex items-center justify-center mb-4">
+                  <InstagramIcon size={28} />
+                </div>
+                <p className="font-display text-2xl font-bold tracking-tight uppercase mb-1">Instagram</p>
+                <p className="text-white/75 text-sm mb-5 max-w-xs">
+                  Follow us for new arrivals, styling inspiration, and behind-the-scenes looks.
+                </p>
+                <span className="text-[11px] font-bold tracking-[0.18em] uppercase bg-white/20 px-5 py-2">
+                  @THEANAKARACLOSET →
+                </span>
+              </a>
+            </Reveal>
 
             {/* TikTok */}
-            <a
-              href="https://www.tiktok.com/@theankaracloset"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col items-center text-center bg-black p-10 text-white hover:opacity-90 transition-opacity"
-            >
-              <div className="w-14 h-14 bg-white/10 flex items-center justify-center mb-4">
-                <TikTokIcon size={28} />
-              </div>
-              <p className="font-display text-2xl font-bold tracking-tight uppercase mb-1">TikTok</p>
-              <p className="text-white/75 text-sm mb-5 max-w-xs">
-                Watch our pieces in motion — outfit reveals, styling videos, and customer clips.
-              </p>
-              <span className="text-[11px] font-bold tracking-[0.18em] uppercase bg-white/10 px-5 py-2">
-                @THEANKARACLOSET →
-              </span>
-            </a>
+            <Reveal delay={60}>
+              <a
+                href="https://www.tiktok.com/@theankaracloset"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col items-center text-center bg-black p-10 text-white hover:opacity-90 transition-opacity h-full"
+              >
+                <div className="w-14 h-14 bg-white/10 flex items-center justify-center mb-4">
+                  <TikTokIcon size={28} />
+                </div>
+                <p className="font-display text-2xl font-bold tracking-tight uppercase mb-1">TikTok</p>
+                <p className="text-white/75 text-sm mb-5 max-w-xs">
+                  Watch our pieces in motion — outfit reveals, styling videos, and customer clips.
+                </p>
+                <span className="text-[11px] font-bold tracking-[0.18em] uppercase bg-white/10 px-5 py-2">
+                  @THEANKARACLOSET →
+                </span>
+              </a>
+            </Reveal>
 
             {/* Email */}
-            <a
-              href="mailto:aishatanaha@gmail.com"
-              className="group flex flex-col items-center text-center bg-[#C4703A] p-10 text-white hover:opacity-95 transition-opacity"
-            >
-              <div className="w-14 h-14 bg-white/20 flex items-center justify-center mb-4">
-                <EmailIcon size={28} />
-              </div>
-              <p className="font-display text-2xl font-bold tracking-tight uppercase mb-1">Email</p>
-              <p className="text-white/75 text-sm mb-5 max-w-xs">
-                Send us an email for enquiries, wholesale requests, or general questions.
-              </p>
-              <span className="text-[11px] font-bold tracking-[0.18em] uppercase bg-white/20 px-5 py-2">
-                aishatanaha@gmail.com →
-              </span>
-            </a>
+            <Reveal delay={120}>
+              <a
+                href="mailto:aishatanaha@gmail.com"
+                className="group flex flex-col items-center text-center bg-[#C4703A] p-10 text-white hover:opacity-95 transition-opacity h-full"
+              >
+                <div className="w-14 h-14 bg-white/20 flex items-center justify-center mb-4">
+                  <EmailIcon size={28} />
+                </div>
+                <p className="font-display text-2xl font-bold tracking-tight uppercase mb-1">Email</p>
+                <p className="text-white/75 text-sm mb-5 max-w-xs">
+                  Send us an email for enquiries, wholesale requests, or general questions.
+                </p>
+                <span className="text-[11px] font-bold tracking-[0.18em] uppercase bg-white/20 px-5 py-2">
+                  aishatanaha@gmail.com →
+                </span>
+              </a>
+            </Reveal>
 
             {/* Hours */}
-            <div className="flex flex-col items-center text-center p-10 border border-gray-100">
-              <div className="w-14 h-14 border border-gray-200 flex items-center justify-center mb-4">
-                <ClockIcon />
+            <Reveal>
+              <div className="flex flex-col items-center text-center p-10 border border-gray-100 h-full">
+                <div className="w-14 h-14 border border-gray-200 flex items-center justify-center mb-4">
+                  <ClockIcon />
+                </div>
+                <p className="font-display text-2xl font-bold tracking-tight uppercase text-black mb-1">Hours</p>
+                <div className="text-gray-400 text-sm flex flex-col gap-2 mt-2 w-full max-w-xs">
+                  {[
+                    { day: "Monday – Friday", time: "8am – 6pm" },
+                    { day: "Saturday (Delivery)", time: "7am – 7pm" },
+                    { day: "Sunday", time: "Closed" },
+                  ].map((row) => (
+                    <div key={row.day} className="flex justify-between gap-4">
+                      <span>{row.day}</span>
+                      <span className="text-black font-semibold">{row.time}</span>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-gray-300 text-xs mt-5">Online only · Ships nationwide & worldwide</p>
               </div>
-              <p className="font-display text-2xl font-bold tracking-tight uppercase text-black mb-1">Hours</p>
-              <div className="text-gray-400 text-sm flex flex-col gap-2 mt-2 w-full max-w-xs">
-                {[
-                  { day: "Monday – Friday", time: "8am – 6pm" },
-                  { day: "Saturday (Delivery)", time: "7am – 7pm" },
-                  { day: "Sunday", time: "Closed" },
-                ].map((row) => (
-                  <div key={row.day} className="flex justify-between gap-4">
-                    <span>{row.day}</span>
-                    <span className="text-black font-semibold">{row.time}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-gray-300 text-xs mt-5">Online only · Ships nationwide & worldwide</p>
-            </div>
+            </Reveal>
           </div>
 
           {/* FAQ */}
-          <div className="mt-14">
-            <h2 className="font-display text-3xl font-bold text-black tracking-tight uppercase text-center mb-8">
-              Common questions
-            </h2>
-            <div className="flex flex-col gap-3">
-              {[
-                {
-                  q: "How do I place an order?",
-                  a: "All orders are placed directly via WhatsApp. Click the 'Order Now' button on any product page and a pre-filled message will be ready. Just send it and we'll take it from there.",
-                },
-                {
-                  q: "How long does delivery take?",
-                  a: "We deliver on Saturdays from 7am–7pm. Order by Thursday to receive your item that Saturday. For express needs, WhatsApp us and we'll advise on options.",
-                },
-                {
-                  q: "Do you ship internationally?",
-                  a: "Yes! We ship to the Nigerian diaspora worldwide — UK, USA, Canada, and more. WhatsApp us for international shipping quotes.",
-                },
-                {
-                  q: "What sizes do you carry?",
-                  a: "Most pieces are available in S, M, L, and XL. Our Kimono & Pant Sets are free size (S–XL). The Asoke Dress also comes in XXL. Check each product page for specifics.",
-                },
-                {
-                  q: "Can I become a reseller?",
-                  a: "Absolutely! We work with boutique owners, Instagram vendors, and fashion entrepreneurs. Visit our Wholesale page or message us on WhatsApp to get started.",
-                },
-              ].map((item) => (
-                <div key={item.q} className="border border-gray-100 p-5">
-                  <p className="font-semibold text-black text-sm mb-2">{item.q}</p>
-                  <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
-                </div>
-              ))}
+          <Reveal>
+            <div className="mt-14">
+              <h2 className="font-display text-3xl font-bold text-black tracking-tight uppercase text-center mb-8">
+                Common questions
+              </h2>
+              <div className="flex flex-col gap-3">
+                {[
+                  {
+                    q: "How do I place an order?",
+                    a: "All orders are placed directly via WhatsApp. Click the 'Order Now' button on any product page and a pre-filled message will be ready. Just send it and we'll take it from there.",
+                  },
+                  {
+                    q: "How long does delivery take?",
+                    a: "We deliver on Saturdays from 7am–7pm. Order by Thursday to receive your item that Saturday. For express needs, WhatsApp us and we'll advise on options.",
+                  },
+                  {
+                    q: "Do you ship internationally?",
+                    a: "Yes! We ship to the Nigerian diaspora worldwide — UK, USA, Canada, and more. WhatsApp us for international shipping quotes.",
+                  },
+                  {
+                    q: "What sizes do you carry?",
+                    a: "Most pieces are available in S, M, L, and XL. Our Kimono & Pant Sets are free size (S–XL). The Asoke Dress also comes in XXL. Check each product page for specifics.",
+                  },
+                  {
+                    q: "Can I become a reseller?",
+                    a: "Absolutely! We work with boutique owners, Instagram vendors, and fashion entrepreneurs. Visit our Wholesale page or message us on WhatsApp to get started.",
+                  },
+                ].map((item, i) => (
+                  <Reveal key={item.q} delay={i * 60}>
+                    <div className="border border-gray-100 p-5">
+                      <p className="font-semibold text-black text-sm mb-2">{item.q}</p>
+                      <p className="text-gray-500 text-sm leading-relaxed">{item.a}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 

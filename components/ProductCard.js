@@ -3,8 +3,9 @@ import Link from "next/link";
 import { formatPrice } from "@/lib/products";
 
 export default function ProductCard({ product }) {
-  const discount = product.originalPrice
-    ? Math.round((1 - product.price / product.originalPrice) * 100)
+  const originalPrice = product.original_price ?? product.originalPrice ?? null;
+  const discount = originalPrice
+    ? Math.round((1 - product.price / originalPrice) * 100)
     : null;
 
   return (
@@ -28,8 +29,6 @@ export default function ProductCard({ product }) {
             -{discount}%
           </span>
         )}
-
-
       </Link>
 
       {/* Info */}
@@ -47,7 +46,7 @@ export default function ProductCard({ product }) {
                 {formatPrice(product.price)}
               </span>
               <span className="text-[11px] text-gray-400 line-through">
-                {formatPrice(product.originalPrice)}
+                {formatPrice(originalPrice)}
               </span>
             </>
           ) : (

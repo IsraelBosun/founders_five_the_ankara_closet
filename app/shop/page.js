@@ -2,7 +2,10 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ProductCard from "@/components/ProductCard";
 import ShopFilters from "@/components/ShopFilters";
-import { products, categories } from "@/lib/products";
+import Reveal from "@/components/Reveal";
+import { getProducts, getCategories } from "@/lib/db";
+
+export const dynamic = 'force-dynamic'
 
 export const metadata = {
   title: "Shop All | The Ankara Closet",
@@ -14,10 +17,15 @@ export default async function ShopPage({ searchParams }) {
   const params = await searchParams;
   const activeCategory = params?.category || "All";
 
+  const [allProducts, categories] = await Promise.all([
+    getProducts(),
+    getCategories(),
+  ]);
+
   const filtered =
     activeCategory === "All"
-      ? products
-      : products.filter((p) => p.category === activeCategory);
+      ? allProducts
+      : allProducts.filter((p) => p.category === activeCategory);
 
   return (
     <>
@@ -45,17 +53,21 @@ export default async function ShopPage({ searchParams }) {
 
           {filtered.length > 0 ? (
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-5 mt-8">
-              {filtered.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              {filtered.map((product, i) => (
+                <Reveal key={product.id} delay={Math.min(i, 7) * 70}>
+                  <ProductCard product={product} />
+                </Reveal>
               ))}
             </div>
           ) : (
-            <div className="text-center py-24 text-gray-400">
-              <p className="font-display text-2xl font-bold text-black mb-2 uppercase tracking-tight">
-                Nothing here yet
-              </p>
-              <p className="text-sm">Check back soon — new drops weekly!</p>
-            </div>
+            <Reveal>
+              <div className="text-center py-24 text-gray-400">
+                <p className="font-display text-2xl font-bold text-black mb-2 uppercase tracking-tight">
+                  Nothing here yet
+                </p>
+                <p className="text-sm">Check back soon — new drops weekly!</p>
+              </div>
+            </Reveal>
           )}
         </div>
       </section>
